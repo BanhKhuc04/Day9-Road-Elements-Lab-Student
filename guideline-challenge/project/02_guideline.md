@@ -1,6 +1,6 @@
 # Annotation guideline — Phân loại biển báo giao thông Việt Nam theo tầng và xác định biển áp dụng cho xe ego — tập trung biển nhỏ/xa, biển tạm công trường và giao lộ nhiều biển
 
-**Version:** v1.2
+**Version:** v2.0
 
 <!--
 v1 = bản nháp đầu; v2 sau calibration; v3 sau blind handoff. Mỗi lần tăng version ghi một dòng vào 08_revision_log.md.
@@ -9,6 +9,20 @@ File này là thứ nhóm peer nhận nguyên văn trong blind pack và là Guid
 
 Đọc hết một lượt (≈ 8 phút) trước khi vẽ. Chỗ nào guideline không đủ để quyết định thì dùng `unknown` +
 `needs_review` theo mục 7, **đừng đoán**. Ảnh: camera hành trình trên đường Việt Nam, 1622×626.
+
+## Quy trình mỗi ảnh (làm đúng thứ tự)
+
+| Bước | Làm gì | Mục |
+|---|---|---|
+| 1 | Quét cả ảnh ở zoom 100 %, rồi zoom 200–400 % dọc hai lề, dải phân cách, dầm cầu, rào công trường. Đánh dấu mọi thứ **giống biển** | 5, 6.1 |
+| 2 | Với từng vật: trong scope không (bảng mục 5)? Mặt biển cao ≥ 12 px không? Không → bỏ qua | 3, 5 |
+| 3 | Vẽ rectangle ôm mặt biển (không cột, không biển phụ) | 2, 3 |
+| 4 | Gán `sign_family` theo **hình dạng + màu** → `sign_class` chỉ khi **đọc được** (không đọc được = `unknown`) | 4, 6.1 |
+| 5 | Gán `relevant_to_ego` theo **vị trí** biển so với đường ego (thứ tự kiểm ở mục 7) | 0, 7 |
+| 6 | Còn phân vân gì → tick `needs_review`. Ảnh không có box nào → tag `no_target_sign`. **Ctrl+S** | 2, 7 |
+
+Trước khi sang ảnh kế: không box nào còn `__undefined__`; mọi box có `relevant_to_ego=unknown` đều đã tick
+`needs_review`.
 
 ## 0. Quy ước trái / phải (đọc trước)
 
@@ -50,6 +64,8 @@ biển chính — **kể cả biển tạm** gắn trên rào/giá chắn công 
 - Biển khu vực (tấm chữ nhật trắng có chữ **ZONE** bao quanh một biển tròn): **1 box cho cả tấm**, class theo biển
   tròn bên trong (mục 4).
 - Hai biển giống nhau hai bên đường: 2 box.
+- Nhiều biển chồng lên nhau trên cùng cột (biển sau bị biển trước che một phần): vẫn vẽ biển phía sau nếu phần
+  thấy cao ≥ 12 px; box ôm phần thấy; class theo mục 6 (bị che > 50 % → `unknown`).
 - Ảnh đã kiểm hết mà không có biển trong scope: tag ảnh `no_target_sign`, không vẽ box. Ảnh có box thì không gắn tag
   này.
 
@@ -62,6 +78,8 @@ biển chính — **kể cả biển tạm** gắn trên rào/giá chắn công 
 - Dây rào, cọc, cành mảnh **vắt qua** mặt biển không tính là bị che: box vẫn ôm trọn biển.
 - **Đo 12 px:** khi kéo rectangle, CVAT hiện kích thước `rộng × cao` cạnh con trỏ — đọc số chiều cao. Chiều cao mặt
   biển < 12 thì xoá box (IGNORE).
+- **Sát ngưỡng (cao 11–13 px):** vẽ hay không vẽ đều chấp nhận, vì đo tay lệch ±1 px. **Đã vẽ thì phải gán đúng** theo
+  mục 6.1 (thấy tròn viền đỏ thì vẫn là `prohibitory`). Biển cao ≤ 10 px: luôn không vẽ.
 - Tolerance: mỗi cạnh lệch ≤ 2 px (biển cao < 30 px) hoặc ≤ 10 % chiều cao biển (biển lớn hơn). Zoom khi vẽ biển nhỏ.
 
 ## 4. Taxonomy
@@ -73,7 +91,7 @@ biển chính — **kể cả biển tạm** gắn trên rào/giá chắn công 
 | `prohibitory` (biển cấm) | Tròn, viền đỏ, nền trắng (hoặc nền xanh với cấm dừng/đỗ); hoặc tròn trắng có vạch chéo đen | `no_entry` (tròn đỏ, vạch trắng ngang — cấm đi ngược chiều), `road_closed` (tròn trắng viền đỏ, **trống** — đường cấm), `no_stopping_parking` (nền xanh, viền đỏ, gạch chéo X), `no_parking` (nền xanh, viền đỏ, 1 gạch), `no_turn_left`, `no_turn_right`, `no_u_turn` (một mũi tên chữ U bị gạch, kể cả khi có hình ô tô bên trong), `no_u_and_left_turn` / `no_u_and_right_turn` (mũi tên rẽ **và** chữ U), `no_motorbike`, `no_car`, `no_truck`, `no_overtaking` (hai ô tô, không có số), `min_distance` (hai xe + **số mét** — cự ly tối thiểu giữa hai xe), `speed_limit_30/40/50/60/70/80`, `speed_limit_other` (số khác, gồm 90/100/110/120, và tấm ghép tốc độ nền trắng theo loại xe/làn), `weight_limit` (số + "t"), `height_limit` (số + "m", mũi tên **dọc**; mũi tên ngang = hạn chế chiều rộng, hình trục xe = tải trọng trục → `prohibitory_other`), `end_of_prohibition` (vạch chéo đen trên biển hoặc trên tấm ZONE = hết lệnh cấm/hết khu vực), `prohibitory_other` |
 | `danger` (nguy hiểm/cảnh báo) | Tam giác đỉnh lên, viền đỏ, nền vàng — **và** tam giác **đỉnh xuống** viền đỏ (`give_way`) | `danger_intersection` (giao nhau), `danger_road` (đường cong, hẹp, dốc, trơn, gồ ghề), `danger_pedestrian` (người đi bộ, trẻ em), `danger_construction` (người xúc đất / công trường), `danger_slow` (chữ "ĐI CHẬM"), `give_way` (tam giác **đỉnh xuống** — giao nhau với đường ưu tiên, nhường đường), `danger_other` |
 | `mandatory` (hiệu lệnh) | Tròn nền xanh, ký hiệu trắng; tấm chữ nhật xanh biển làn; **bát giác đỏ chữ STOP** | `keep_right` (mũi tên chỉ xuống/sang **phải** — đi vòng bên phải), `keep_left` (mũi tên chỉ xuống/sang **trái**, chéo hoặc ngang — đi vòng bên trái), `stop` (bát giác đỏ chữ STOP — dừng lại), `ahead_only`, `turn_left_only`, `turn_right_only`, `roundabout`, `lane_vehicle_permission` (biển làn chỉ loại xe), `lane_vehicle_speed` (biển làn có loại xe + số tốc độ), `min_speed` (tròn **nền xanh, số trắng** — tốc độ **tối thiểu**), `end_min_speed` (như trên có vạch chéo đỏ), `mandatory_other` |
-| `informative` (chỉ dẫn) | Vuông/chữ nhật **xanh** có ký hiệu (không phải tên địa danh) | `pedestrian_crossing`, `one_way`, `overpass_route` (cầu vượt/hầm), `priority_road` (hình thoi vàng viền trắng), `end_priority_road` (hình thoi có vạch chéo), `informative_other` (bến xe buýt, chợ, bắt đầu/hết khu đông dân cư…) |
+| `informative` (chỉ dẫn) | Vuông/chữ nhật **xanh** có **một ký hiệu/hình vẽ** hoặc chữ ngắn theo mẫu QCVN (không phải tên địa danh, không phải bảng nhiều dòng chữ) | `pedestrian_crossing`, `one_way`, `overpass_route` (cầu vượt/hầm), `priority_road` (hình thoi vàng viền trắng), `end_priority_road` (hình thoi có vạch chéo), `informative_other` (bến xe buýt, chợ, bắt đầu/hết khu đông dân cư…) |
 | `supplementary` (biển phụ) | Tấm chữ nhật nhỏ gắn **ngay dưới biển chính và giải thích biển đó** (loại xe, khoảng cách, giờ, mũi tên hướng tác dụng) — **bất kể màu nền** | `supplementary_plate` |
 | `unknown` | Chỉ ở mức C/D mục 6.1: biết là biển nhưng không xác định được hình dạng hoặc màu | `unknown` |
 
@@ -81,6 +99,13 @@ Quy tắc:
 
 - `sign_class=unknown` khi thấy nhóm biển nhưng không đọc được ký hiệu/chữ số. **Không đoán số tốc độ, số tấn, số
   mét.** Đọc được số nhưng không có trong danh sách: `speed_limit_other`.
+- **Phép thử "đọc được":** ở zoom 400 %, mọi chữ số / nét ký hiệu phải phân biệt rõ. Biển có giá trị (tốc độ, tấn,
+  mét) cao < 20 px mà chữ số có thể là 3/5/6/8 → `unknown`. Biển nền xanh viền đỏ nhỏ mà không thấy rõ 1 gạch hay
+  gạch chéo X → `prohibitory/unknown`.
+- **Phân vân giữa hai class** (ví dụ `no_u_and_left_turn` hay `no_u_and_right_turn`) → `unknown`. Không dùng
+  `needs_review` để đánh dấu "không chắc class".
+- **Tấm dưới biển chính:** tấm gắn ngay dưới biển chính trên cùng cột → `supplementary` **trước tiên**, kể cả tấm xanh
+  không đọc được chữ. Rule "tấm xanh không đọc được → `informative/unknown`" (mục 5) chỉ áp cho tấm đứng riêng.
 - Class phải thuộc đúng family trong bảng.
 - **Số trên nền trắng viền đỏ = tốc độ tối đa** (`speed_limit_*`); **số trắng trên nền xanh = tốc độ tối thiểu**
   (`min_speed`). Nhầm hai loại này làm hệ thống hiểu ngược biển.
@@ -99,6 +124,8 @@ Quy tắc:
 | Bảng chỉ đường/địa danh (nền xanh lá/xanh dương có tên địa điểm, km), bảng trên giá long môn | **IGNORE** — vẫn là biển chỉ dẫn nhóm I theo QCVN, nhưng **ngoài scope** vì downstream (nhắc tốc độ, cấm, công trường) không dùng |
 | Tấm tên cầu / tên đường (chữ tên cầu, chiều dài, chiều rộng cầu), kể cả khi gắn dưới biển cấm | **IGNORE** — không giải thích biển chính nên không phải biển phụ |
 | Bảng thông tin dự án, bảng "CÔNG TRƯỜNG ĐANG THI CÔNG", băng rôn, bảng tuyên truyền | **IGNORE** (không phải biển QCVN, dù có hình biển nhỏ in bên trong) |
+| Bảng thông tin nhà chờ / lộ trình / giờ chạy xe buýt (nhiều dòng chữ, số tuyến) | **IGNORE** — chỉ biển vuông xanh **một hình xe buýt** (bến xe buýt) mới là `informative/informative_other` |
+| Tấm xanh nhỏ **đứng riêng** (không gắn dưới biển chính), **không đọc được chữ**, không phân biệt được biển chỉ dẫn luật hay bảng địa danh | **LABEL** `informative/unknown`, tick `needs_review` (quy tắc "phân vân thì vẽ", mục 7) |
 | Biển quảng cáo, biển quán, "BÁN ĐẤT", tờ rơi dán cột | **IGNORE** |
 | Mặt sau biển; biển nhìn thấy từ cạnh (chỉ thấy một vệt mỏng) | **IGNORE** |
 | Dây rào, cọc tiêu, barie, vạch sơn trên đường, đèn giao thông | **IGNORE** |
@@ -131,6 +158,11 @@ Quy tắc đi kèm:
 - `relevant_to_ego` ở mức B/C vẫn gán theo **vị trí** (mục 7) — vị trí luôn nhìn thấy được kể cả khi không đọc được
   biển. Chỉ dùng `unknown` khi vị trí thật sự không cho biết (mục 7).
 - Chỉ dùng `sign_family=unknown` ở mức C/D. Đã thấy tròn viền đỏ thì phải là `prohibitory`, không được để `unknown`.
+- **Xác định màu khi biển nhỏ:** zoom 400 %, nhìn **viền ngoài cùng** — viền đỏ (biển cấm/nguy hiểm) hay cả mặt xanh
+  (hiệu lệnh/chỉ dẫn). Không suy family từ vị trí hay biển bên cạnh (ví dụ "đứng cạnh đèn nên chắc là biển chỉ dẫn").
+  Vẫn không chắc đỏ hay xanh → mức C.
+- Mức D: vẽ box + tick `needs_review`. Vật mức D cao < 16 px (tấm tối nhỏ có thể là mặt sau biển, bảng màu nhỏ ở xa)
+  không vẽ cũng chấp nhận; **đã vẽ thì bắt buộc tick** `needs_review`.
 - Nhiều biển xa dính nhau trên cùng một cột mà không tách được từng mặt: vẽ **1 box cho cả cụm**, mức C, tick
   `needs_review`.
 
@@ -139,12 +171,20 @@ Quy tắc đi kèm:
 **`relevant_to_ego`** (xe đi bên phải đường; trái/phải theo quy ước mục 0). Căn cứ: QCVN đặt biển **bên phải theo
 chiều đi**, có thể đặt bổ sung bên trái hoặc phía trên — vì vậy lề phải → `yes`, lề trái không có bản lặp → `unknown`.
 
-- `yes`: biển quay mặt về camera và (a) ở lề **phải** đường ego, (b) trên dải phân cách / đảo giao thông ngay bên
-  trái chiều đi của ego (biển ở đầu dải phân cách như cấm đi ngược chiều + đi vòng bên phải), (c) treo trên làn ego hoặc
-  gắn trên dầm cầu vượt mà ego sắp chui qua, hoặc (d) trên rào chắn đặt trên chính đường ego.
-- `no`: biển rõ ràng phục vụ đường khác — quay lệch hẳn sang đường ngang, ở phía chiều ngược lại bên kia dải phân cách.
-- `unknown`: biển quay về camera nhưng đặt ở lề trái / góc giao lộ / dưới gầm cầu bên trái, không suy ra được nó
-  phục vụ ego hay nhánh đường khác. **Luôn kèm `needs_review=true`.**
+Kiểm **theo thứ tự**, dừng ở dòng đầu tiên đúng:
+
+| # | Biển ở đâu (biển quay mặt về camera) | `relevant_to_ego` |
+|---|---|---|
+| 1 | Quay lệch hẳn sang đường ngang, hoặc ở phía chiều ngược lại bên kia dải phân cách | `no` |
+| 2 | (d) Trên rào chắn / giá tạm đặt trên chính phần đường ego | `yes` |
+| 3 | (c) Treo trên làn ego (giá long môn) hoặc gắn trên dầm cầu vượt mà ego sắp chui qua | `yes` |
+| 4 | (a) Lề **phải** đường ego | `yes` |
+| 5 | (b) **Đầu** dải phân cách ngăn ego với chiều ngược lại, đứng chắn ngay trước hướng đi của ego, **không có nhánh đường nào** giữa ego và biển (ví dụ cấm đi ngược chiều + đi vòng bên phải) | `yes` |
+| 6 | Còn lại: lề trái, đảo giữa một **nhánh rẽ / đường gom / đường dưới gầm cầu** và đường ego, góc giao lộ — không suy ra được biển phục vụ ego hay nhánh kia | `unknown` + **bắt buộc** `needs_review` |
+
+- Biển phụ: relevance **giống biển chính** nó gắn dưới.
+- Relevance gán theo vị trí nên vẫn gán được khi không đọc được biển (mức B/C).
+- Biển ở dòng 6 mà có **bản lặp** ở lề phải (cùng loại biển, cùng khoảng cách): cả hai `yes`.
 
 **Biển tạm mâu thuẫn biển cố định** (ví dụ mũi tên đi vòng trái trên rào công trường và mũi tên đi vòng phải cố định ở
 dải phân cách): label **cả hai** với relevance theo vị trí như bình thường. Theo QCVN, người đi đường chấp hành **biển
@@ -160,6 +200,9 @@ tạm**; downstream tự xử lý thứ tự ưu tiên — annotator không bỏ
 
 Phân vân "có phải biển trong scope không" → **vẽ box**, gán theo thứ thấy được, tick `needs_review`.
 
+`needs_review` chỉ dùng cho ba trường hợp: relevance `unknown`, phân vân LABEL/IGNORE, vật mức D. Không chắc class →
+`sign_class=unknown`, không tick.
+
 ## 8. Temporal rule
 
 Không áp dụng — task ảnh tĩnh, dùng **Shape**, không dùng Track.
@@ -174,6 +217,14 @@ Không áp dụng — task ảnh tĩnh, dùng **Shape**, không dùng Track.
 | VN02 | Dải phân cách trái: biển làn xanh + cột có cấm dừng đỗ và biển tròn nhỏ; lề phải: biển làn có số tốc độ, cấm đỗ + vuông xanh mũi tên | Biển làn: 1 box cả tấm — `mandatory/lane_vehicle_permission` (trái) và `mandatory/lane_vehicle_speed` (phải ≈ 1021–1059, 332–393). `no_stopping_parking`, `no_parking` đọc theo hình. Vuông xanh mũi tên gắn dưới cấm đỗ, giải thích hướng tác dụng: `supplementary/supplementary_plate` | mục 2 (biển làn), mục 4 (biển phụ bất kể màu nền) |
 | VN03 | Lề phải: biển vuông xanh "CHỢ – MARKET"; xa: tam giác giao nhau ~21 px; biển rất nhỏ < 12 px; bảng "BÁN TRÀ" | `informative/informative_other/yes`; tam giác xa: `danger/danger_intersection/yes`. Biển < 12 px và bảng quảng cáo: IGNORE | mục 5, mục 6 |
 | VN04 | Đường ngoại ô, chỉ có bảng quán ("CẦM ĐỒ", "BÚN PHỞ CƠM") và bảng xanh địa danh nhỏ | Không box; tag ảnh `no_target_sign` | mục 2, mục 5 |
+
+Ví dụ từ ảnh calibration (lấy từ edge-case card của nhóm, không phải ảnh blind):
+
+| sample_id | Thấy gì | Expected output | Rule áp dụng |
+|---|---|---|---|
+| VN11 | Cột lề phải 3 tấm: tròn đỏ "13 t"; tròn đỏ hai ô tô + "30 m"; tấm xanh "CẦU KIỆU — DÀI 38.9 m — RỘNG 15.2 m" | `prohibitory/weight_limit/yes`; `prohibitory/min_distance/yes` (có số mét nên **không** phải `no_overtaking`). Tấm tên cầu: IGNORE (không phải biển phụ, không phải `height_limit`) | mục 4, mục 5 |
+| VN08 | Trụ bên trái: bảng thông tin nhà chờ xe buýt nhiều dòng chữ (số tuyến, giờ chạy) | Không box — bảng thông tin, không phải biển pictogram bến xe buýt | mục 5 |
+| VN06 | Lề phải: tròn đỏ cấm xe tải + tấm trắng ghi giờ bên dưới; biển xa bên kia ngã tư; bảng quảng cáo xanh lá trên nóc nhà | 2 box riêng: `prohibitory/no_truck/yes` và `supplementary/supplementary_plate/yes`. Biển xa ≥ 12 px: family theo hình, class `unknown` nếu không đọc được. Quảng cáo, bảng tên trạm xăng: IGNORE | mục 2, mục 5, mục 6.1 |
 
 ## 10. Common mistakes
 
@@ -192,6 +243,13 @@ Không áp dụng — task ảnh tĩnh, dùng **Shape**, không dùng Track.
 13. Gán số trên nền xanh thành `speed_limit_*` → đó là `min_speed` (tốc độ tối thiểu).
 14. Gán tam giác đỉnh xuống thành `danger_other` hoặc `unknown` → `give_way`; bát giác STOP → `mandatory/stop`.
 15. Vẽ tấm tên cầu dưới biển cấm thành biển phụ → IGNORE.
+16. Gán `yes` cho biển trên đảo giữa ego và một nhánh rẽ / đường dưới gầm cầu → `unknown` + `needs_review` (mục 7,
+    dòng 6). Chỉ biển ở **đầu dải phân cách chắn trước hướng đi ego** mới là `yes`.
+17. Vẽ bảng lộ trình / giờ chạy xe buýt thành `informative_other` → IGNORE.
+18. Đoán family của biển nhỏ theo ngữ cảnh (gần đèn, gần biển khác) → xem **màu viền** sau khi zoom 400 % (mục 6.1).
+19. Gán biển hai xe + số mét thành `no_overtaking` → `min_distance`.
+20. Đọc số trên biển tốc độ nhỏ < 20 px khi chữ số chưa rõ → `unknown` (mục 4, phép thử đọc được).
+21. Box biển nhỏ rộng hơn mặt biển vài px → zoom ≥ 200 % khi vẽ; biển < 30 px chỉ được lệch ≤ 2 px mỗi cạnh.
 
 Chưa có ảnh ví dụ trong bộ example/calibration cho STOP, nhường đường, đường ưu tiên, tốc độ tối thiểu — nhận biết theo
 mô tả hình ở bảng mục 4.
