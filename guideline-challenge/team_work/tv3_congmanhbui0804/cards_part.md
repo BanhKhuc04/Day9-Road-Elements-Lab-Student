@@ -31,3 +31,5 @@ Diversity: ambiguity, conflict (ranh giới giữa biển QCVN dạng pictogram 
 ## Câu hỏi cho nhóm trưởng
 
 1. VN08 (calibration): tấm bảng dưới nền xanh dương ở trụ (300-380;55-210) có bố cục giống bảng lộ trình xe buýt hơn là biển pictogram QCVN đơn — guideline mục 4 chỉ liệt kê `informative_other` là loại pictogram đơn (bến xe buýt/chợ...). Xác nhận giúp: những bảng lộ trình/giờ chạy kiểu này có nằm trong scope không, hay quy tắc IGNORE ở mục 5 (bảng thông tin dù có hình biển nhỏ bên trong) áp dụng cho cả trường hợp này?
+
+**Nhóm trưởng trả lời:** VN08 là ảnh calibration nên để nguyên cho 4 bạn label độc lập theo guideline hiện tại; sau `make calib`, nếu các bạn lệch nhau ở tấm này thì chốt rule ở **v2** (đề xuất: bảng lộ trình/nhà chờ nhiều dòng chữ → IGNORE; biển vuông xanh chỉ có icon xe buýt → `informative_other`).

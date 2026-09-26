@@ -2,6 +2,8 @@
 
 ## Bài toán
 
+**Tên đề tài:** Phân loại biển báo giao thông Việt Nam theo tầng và xác định biển áp dụng cho xe ego — tập trung biển nhỏ/xa, biển tạm công trường và giao lộ nhiều biển.
+
 Gắn box + phân loại theo tầng (`sign_family` → `sign_class`) cho **biển báo giao thông Việt Nam (QCVN 41)** trong
 ảnh camera hành trình, và đánh dấu biển có **áp dụng cho hướng đi của ego** hay không — khó nhất ở biển nhỏ/xa
 (38 % box trong dataset cao < 20 px), biển tạm trên rào công trường, cột nhiều biển ở giao lộ/dải phân cách, và vật

@@ -21,6 +21,8 @@ thư mục này cho nhóm peer.
 
 ## Raw label cho CVAT
 
+> ⚠️ Bản hiện tại ứng với guideline **v1.2** (52 class). Task CVAT tạo trước v1.2 hoặc tạo bằng raw label biển Đức cũ phải **tạo lại** trước khi label calibration.
+
 Khi tạo task (calibration, peer, review): **Labels → tab Raw** → xoá nội dung có sẵn → dán **toàn bộ** khối JSON
 dưới đây → **Save** → sang tab **Constructor** kiểm có đủ `traffic_sign` (4 attribute: `sign_family`, `sign_class`,
 `relevant_to_ego`, `needs_review`), `no_target_sign`, `image_escalate`.
@@ -70,6 +72,7 @@ Nếu file gốc đổi, khối dưới đây được cập nhật theo; thấy
           "no_car",
           "no_truck",
           "no_overtaking",
+          "min_distance",
           "speed_limit_30",
           "speed_limit_40",
           "speed_limit_50",
@@ -86,19 +89,25 @@ Nếu file gốc đổi, khối dưới đây được cập nhật theo; thấy
           "danger_pedestrian",
           "danger_construction",
           "danger_slow",
+          "give_way",
           "danger_other",
           "keep_right",
           "keep_left",
+          "stop",
           "ahead_only",
           "turn_left_only",
           "turn_right_only",
           "roundabout",
           "lane_vehicle_permission",
           "lane_vehicle_speed",
+          "min_speed",
+          "end_min_speed",
           "mandatory_other",
           "pedestrian_crossing",
           "one_way",
           "overpass_route",
+          "priority_road",
+          "end_priority_road",
           "informative_other",
           "supplementary_plate",
           "unknown"

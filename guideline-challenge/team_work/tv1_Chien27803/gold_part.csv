@@ -1,7 +1,7 @@
 sample_id,decision_id,expected,severity,rationale
 VN12,d1,label=traffic_sign x2 (biển tròn lớn cột phải + biển tròn đỏ nhỏ dưới gầm cầu),major,mục 2 + mục 6.1: biển nhỏ ~18 px vẫn ≥ 12 px nên phải vẽ
 VN12,d2,biển tròn lớn ≈ (1162;61)-(1253;143): sign_family=prohibitory; sign_class=no_u_turn; relevant_to_ego=yes,critical,mục 4: một mũi tên chữ U bị gạch; mục 7 (a): lề phải quay về camera
-VN12,d3,biển nhỏ ≈ (570;232)-(578;249): sign_family=prohibitory; sign_class=no_entry; relevant_to_ego=yes,major,mục 4: tròn đỏ vạch trắng ngang
+VN12,d3,biển nhỏ ≈ (570;232)-(578;249) dưới gầm cầu bên trái: sign_family=prohibitory; sign_class=no_entry hoặc unknown đều đúng; relevant_to_ego không chấm,major,mục 4: tròn đỏ vạch trắng ngang; mục 6.1: biển ~18 px có thể không đọc rõ vạch; relevance của biển xa dưới gầm cầu (yes theo annotator; unknown theo mục 7) để escalate — nhóm trưởng chốt không chấm
 VN12,d4,geometry: box biển cấm quay đầu ôm vành đỏ; không gồm cột sọc đỏ-trắng,minor,mục 3
 VN15,d1,geometry: 1 box ôm cả tấm ZONE ≈ (931;97)-(1020;247); không chỉ biển tròn bên trong,major,mục 2: biển khu vực = 1 box cả tấm
 VN15,d2,tấm ZONE: sign_family=prohibitory; sign_class=end_of_prohibition; relevant_to_ego=yes,major,mục 4: vạch chéo đen = hết khu vực cấm dừng đỗ; lề phải

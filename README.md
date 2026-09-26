@@ -1,8 +1,10 @@
-# Nhóm 2 — Guideline Design Challenge: biển báo giao thông Việt Nam
+# Nhóm 2 — Phân loại biển báo giao thông Việt Nam theo tầng và xác định biển áp dụng cho xe ego — tập trung biển nhỏ/xa, biển tạm công trường và giao lộ nhiều biển
 
 Nhóm 2 làm bài `guideline-challenge/`. Việc của từng thành viên: [`guideline-challenge/team_work/README.md`](guideline-challenge/team_work/README.md).
 Ảnh calibration (cả nhóm label chung): [`guideline-challenge/team_work/calibration/`](guideline-challenge/team_work/calibration/).
-Guideline: [`guideline-challenge/project/02_guideline.md`](guideline-challenge/project/02_guideline.md).
+Guideline (hiện **v1.2**): [`guideline-challenge/project/02_guideline.md`](guideline-challenge/project/02_guideline.md).
+
+> ⚠️ Raw label đã đổi ở v1.2 (thêm `stop`, `give_way`, `priority_road`, `end_priority_road`, `min_speed`, `end_min_speed`, `min_distance`). Ai đã tạo task CVAT trước đó: **tạo task mới** với khối JSON dưới rồi mới label calibration.
 
 ## Raw label cho CVAT
 
@@ -52,6 +54,7 @@ kiểm có `traffic_sign` (4 attribute), `no_target_sign`, `image_escalate`. B�
           "no_car",
           "no_truck",
           "no_overtaking",
+          "min_distance",
           "speed_limit_30",
           "speed_limit_40",
           "speed_limit_50",
@@ -68,19 +71,25 @@ kiểm có `traffic_sign` (4 attribute), `no_target_sign`, `image_escalate`. B�
           "danger_pedestrian",
           "danger_construction",
           "danger_slow",
+          "give_way",
           "danger_other",
           "keep_right",
           "keep_left",
+          "stop",
           "ahead_only",
           "turn_left_only",
           "turn_right_only",
           "roundabout",
           "lane_vehicle_permission",
           "lane_vehicle_speed",
+          "min_speed",
+          "end_min_speed",
           "mandatory_other",
           "pedestrian_crossing",
           "one_way",
           "overpass_route",
+          "priority_road",
+          "end_priority_road",
           "informative_other",
           "supplementary_plate",
           "unknown"

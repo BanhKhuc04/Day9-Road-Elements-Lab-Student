@@ -17,14 +17,13 @@ Diversity: critical / conflict (keep_left trên rào và keep_right ở dải ph
 
 CASE ID: TV4-2
 Sample: VN11
-Scene: TODO
-Observation: TODO — thấy gì trong ảnh
-Decision: TODO — LABEL / IGNORE / UNKNOWN / ESCALATE
-Expected: TODO — class, attribute, geometry cụ thể
-Rationale: TODO — gắn với downstream contract ở `project/01_problem_statement.md`
-Common mistake: TODO
-Diversity: TODO — occlusion / small_far / ambiguity / conflict / critical / escalation / …
-
+Scene: Phố thương mại đông xe máy, ban ngày; lề phải có một cột biển trước lối lên cầu, mặt tiền cửa hàng phía sau có chữ và hình trang trí
+Observation: Cột lề phải có 3 tấm từ trên xuống: tròn viền đỏ "13 t" (≈ 1210–1300, 165–258); tròn viền đỏ có hai ô tô, vạch chéo đỏ và "30 m" (≈ 1220–1310, 258–360); tấm chữ nhật xanh "CẦU KIỆU — DÀI 38.9 m — RỘNG 15.2 m" (≈ 1238–1312, 355–425). Mặt tiền cửa hàng có hình thoi vàng trang trí và băng rôn xanh bên trái
+Decision: LABEL 2 biển tròn; IGNORE tấm tên cầu, hình trang trí, băng rôn
+Expected: `prohibitory / weight_limit / relevant_to_ego=yes` cho tấm "13 t"; `prohibitory / min_distance / relevant_to_ego=yes` cho tấm "30 m" hai ô tô. Không có box trên tấm tên cầu (không phải biển phụ vì không giải thích biển chính), hình thoi trang trí trên cửa hàng, băng rôn tuyên truyền
+Rationale: Tải trọng và cự ly tối thiểu là giới hạn cho xe ego trước khi lên cầu (failure b trong `project/01_problem_statement.md`: sai giá trị tải trọng → xe quá tải lên cầu). Tấm tên cầu có số mét dễ bị đọc nhầm thành biển phụ hoặc `height_limit`, làm downstream hiểu sai giới hạn
+Common mistake: Gán biển hai ô tô + "30 m" thành `no_overtaking` (biển cấm vượt không có số mét); vẽ tấm tên cầu thành `supplementary_plate` hoặc `informative_other`; gộp 3 tấm vào 1 box; đọc "38.9 m" trên tấm tên cầu thành `height_limit`
+Diversity: conflict / ambiguity (biển có số mét: cự ly tối thiểu vs cấm vượt vs tên cầu)
 ---
 
 ## Câu hỏi cho nhóm trưởng
@@ -33,3 +32,6 @@ Diversity: TODO — occlusion / small_far / ambiguity / conflict / critical / es
    needs_review=true" (mức D mục 6.1 v1.1) đều đúng; box không tick needs_review là sai. Nhóm trưởng xác nhận cách chấm.
 2. VN14 — dây rào vắt ngang mặt biển đường cấm: gold d10 coi dây mảnh không phải "bị che" nên box ôm trọn vòng tròn.
    Guideline v2 có nên ghi rõ "dây/cọc mảnh vắt qua không tính là che" không?
+
+**Nhóm trưởng trả lời:** (1) Đồng ý cách chấm d9: không box, hoặc box + `needs_review=true` đều đúng. (2) Đã thêm vào
+guideline v1.2 mục 3: dây rào, cọc, cành mảnh vắt qua không tính là bị che.

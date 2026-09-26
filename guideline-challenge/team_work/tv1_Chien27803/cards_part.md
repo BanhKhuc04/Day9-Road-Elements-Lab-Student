@@ -31,3 +31,4 @@ Diversity: ambiguity / conflict (biển khu vực giữa nhiều bảng quảng 
 ## Câu hỏi cho nhóm trưởng
 
 - VN12: biển tròn đỏ nhỏ dưới gầm cầu bên trái — đã gán `relevant_to_ego=yes`; theo mục 7 guideline có nên là `unknown` + `needs_review` không?
+  - **Nhóm trưởng trả lời:** vị trí dưới gầm cầu bên trái không đủ để chốt; gold d3 chỉ chấm family/class, không chấm relevance.

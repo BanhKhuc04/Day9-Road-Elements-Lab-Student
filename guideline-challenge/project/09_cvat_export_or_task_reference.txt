@@ -1,8 +1,8 @@
-CVAT task reference — thay mọi placeholder mới là xong.
+CVAT task reference — nhóm 2.
 
-CVAT version: TODO
-Task calibration (tên, id): TODO
-Task bản cuối theo guideline v3 (tên, id) hoặc lý do không có: TODO
-File export đã nộp (đường dẫn trong repo): TODO
-Guideline version dán trong Guide của task: TODO
-Ghi chú cho người tiếp nhận: TODO
+CVAT version: 2.74.1 (CVAT local của từng thành viên, http://localhost:8080)
+Task calibration (tên, id): signs-calib-v1-tvN trên CVAT máy từng thành viên (tv1–tv4); id ghi trong <meta><task> của project/06_calibration_exports/tvN.zip — chờ các thành viên nộp export
+Task bản cuối theo guideline v3 (tên, id) hoặc lý do không có: chưa có — tạo sau blind handoff (review-<nhóm peer> theo GUIDE mục 6, dùng project/03_cvat_labels.json đã freeze)
+File export đã nộp (đường dẫn trong repo): project/06_calibration_exports/tv1.zip … tv4.zip (calibration, chờ nộp); project/07_blind_handoff/peer_output/ (export của nhóm peer, sau blind test); bản label ảnh blind của thành viên dùng soạn gold: team_work/tv1_Chien27803/day9_chien.zip, team_work/tv2_BanhKhuc04/job_19_annotations_corrected.zip
+Guideline version dán trong Guide của task: v1.2 (project/02_guideline.md) — dán lại mỗi khi tăng version
+Ghi chú cho người tiếp nhận: dán nguyên project/03_cvat_labels.json vào tab Raw (52 class trong sign_class); ảnh ở data/vtsd/ (VN01–VN16, dataset Kaggle VTSD, xem ATTRIBUTION.txt); export dạng CVAT for images 1.1, Save images tắt; Shape, không Track
