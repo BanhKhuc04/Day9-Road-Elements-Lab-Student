@@ -1,3 +1,131 @@
+# Nhóm 2 — Guideline Design Challenge: biển báo giao thông Việt Nam
+
+Nhóm 2 làm bài `guideline-challenge/`. Việc của từng thành viên: [`guideline-challenge/team_work/README.md`](guideline-challenge/team_work/README.md).
+Ảnh calibration (cả nhóm label chung): [`guideline-challenge/team_work/calibration/`](guideline-challenge/team_work/calibration/).
+Guideline: [`guideline-challenge/project/02_guideline.md`](guideline-challenge/project/02_guideline.md).
+
+## Raw label cho CVAT
+
+Tạo task → **Labels** → tab **Raw** → xoá nội dung có sẵn → dán **toàn bộ** khối dưới → **Save** → tab **Constructor**
+kiểm có `traffic_sign` (4 attribute), `no_target_sign`, `image_escalate`. Bản gốc:
+[`guideline-challenge/project/03_cvat_labels.json`](guideline-challenge/project/03_cvat_labels.json).
+
+```json
+[
+  {
+    "name": "traffic_sign",
+    "color": "#E53935",
+    "type": "rectangle",
+    "attributes": [
+      {
+        "name": "sign_family",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "prohibitory",
+          "danger",
+          "mandatory",
+          "informative",
+          "supplementary",
+          "unknown"
+        ]
+      },
+      {
+        "name": "sign_class",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "no_entry",
+          "road_closed",
+          "no_stopping_parking",
+          "no_parking",
+          "no_turn_left",
+          "no_turn_right",
+          "no_u_turn",
+          "no_u_and_left_turn",
+          "no_u_and_right_turn",
+          "no_motorbike",
+          "no_car",
+          "no_truck",
+          "no_overtaking",
+          "speed_limit_30",
+          "speed_limit_40",
+          "speed_limit_50",
+          "speed_limit_60",
+          "speed_limit_70",
+          "speed_limit_80",
+          "speed_limit_other",
+          "weight_limit",
+          "height_limit",
+          "end_of_prohibition",
+          "prohibitory_other",
+          "danger_intersection",
+          "danger_road",
+          "danger_pedestrian",
+          "danger_construction",
+          "danger_slow",
+          "danger_other",
+          "keep_right",
+          "keep_left",
+          "ahead_only",
+          "turn_left_only",
+          "turn_right_only",
+          "roundabout",
+          "lane_vehicle_permission",
+          "lane_vehicle_speed",
+          "mandatory_other",
+          "pedestrian_crossing",
+          "one_way",
+          "overpass_route",
+          "informative_other",
+          "supplementary_plate",
+          "unknown"
+        ]
+      },
+      {
+        "name": "relevant_to_ego",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "yes",
+          "no",
+          "unknown"
+        ]
+      },
+      {
+        "name": "needs_review",
+        "mutable": false,
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": [
+          "false"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "no_target_sign",
+    "color": "#43A047",
+    "type": "tag",
+    "attributes": []
+  },
+  {
+    "name": "image_escalate",
+    "color": "#8E24AA",
+    "type": "tag",
+    "attributes": []
+  }
+]
+```
+
+---
+
 # Day 9 Lab — Road Elements
 
 Repo mẫu này chứa **hai bài lab Day 9 độc lập**. Đầu buổi Lab Coach báo lớp làm bài nào; bạn chỉ làm bài đó và để
