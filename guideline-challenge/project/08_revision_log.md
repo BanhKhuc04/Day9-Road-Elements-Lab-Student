@@ -8,4 +8,4 @@ Cột Version ghi dạng `v1`, `v2`, `v3` — `make status` tìm dòng bảng c�
 
 | Version | Đổi gì | Vì sao | Bằng chứng |
 |---|---|---|---|
-| v1 | Bản nháp đầu: scope biển luật Đức ≥ 12 px; taxonomy 2 tầng `sign_family` → `sign_class` (40 class + `*_other` + `unknown`); `relevant_to_ego` yes/no/unknown; bảng IGNORE (biển chỉ đường, mặt sau, quảng cáo, thiết bị dẫn hướng); 4 ví dụ | Chốt downstream contract (ISA / cảnh báo STOP) trước khi mở CVAT | `01_problem_statement.md`; ví dụ GTS18, GTS20, GTS05, GTS28 |
+| v1 | Bản nháp đầu cho biển báo Việt Nam (QCVN 41): scope biển mặt trước ≥ 12 px gồm biển tạm công trường; taxonomy 2 tầng 5 nhóm → 45 class (tốc độ tách theo giá trị, `*_other`, `unknown`); rule 1 box cho biển làn và tấm ZONE; `relevant_to_ego` yes/no/unknown; bảng IGNORE (bảng địa danh, bảng dự án, quảng cáo, mặt sau); 4 ví dụ. Thay bản nháp GTSDB (biển Đức) trước khi calibration vì nhóm đổi sang dataset Kaggle VN được Lab Coach cho phép | Downstream là hỗ trợ lái trên đường Việt Nam; biển Đức không phản ánh biển làn, biển tạm công trường, mật độ quảng cáo của đường VN | `01_problem_statement.md`; ví dụ VN01–VN04 |

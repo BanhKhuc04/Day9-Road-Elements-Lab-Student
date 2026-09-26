@@ -14,3 +14,11 @@ Tên: German Traffic Sign Detection Benchmark (GTSDB) — FullIJCNN2013.zip
 Giấy phép: ReadMe.txt: 'You are free to use this data package for any purpose you like'; trích dẫn paper nếu công bố.
 Trích dẫn: Houben et al., Detection of Traffic Signs in Real-World Images: The German Traffic Sign Detection Benchmark, IJCNN 2013
 Trang chủ: https://benchmark.ini.rub.de/gtsdb_dataset.html
+
+---
+Nhóm 2 (guideline-challenge) dùng thêm, với sự cho phép của Lab Coach/giảng viên:
+- 16 ảnh trong data/vtsd/ (VN01–VN16, catalog source = vtsd) lấy từ dataset Kaggle
+  "Vietnamese traffic signs detection and recognition" — tác giả Dat Nguyen (jaydenguyenx), cập nhật 2023-06-19,
+  https://www.kaggle.com/datasets/jaydenguyenx/vietnamese-traffic-signs-detection-and-recognition
+  License trên Kaggle: "Unknown" (tác giả không công bố license). Chỉ dùng cho học tập phi thương mại trong lab này;
+  tên file gốc ghi ở cột original_name của data/catalog.csv.
