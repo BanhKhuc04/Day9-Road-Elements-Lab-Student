@@ -1,0 +1,22 @@
+sample_id,decision_id,expected,severity,rationale
+GTS06,d1,label=traffic_sign x3 (tròn 30 + 2 biển phụ ↑300m↑ và 7-18 h),major,mục 2 + mục 5: biển phụ là box riêng
+GTS06,d2,sign_family=prohibitory; sign_class=speed_limit_30; relevant_to_ego=yes,critical,lề phải quay về camera; sai số tốc độ làm ISA nhắc sai
+GTS06,d3,2 biển phụ: sign_family=supplementary; sign_class=supplementary_plate; relevant_to_ego=yes,major,mục 5: relevance biển phụ = biển chính
+GTS06,d4,geometry: box tròn 30 ≈ (818;336)-(857;374) không gồm biển phụ (cạnh dưới ≤ y 377),minor,mục 3
+GTS12,d1,label=traffic_sign x1: tam giác công trường danger/danger_road_works; relevant_to_ego=yes,major,lề phải phía trước; đọc được người xúc đất khi zoom
+GTS12,d2,IGNORE: không có box trên mũi tên vàng Umleitung ≈ (598;427)-(662;446),major,mục 5: biển chỉ đường
+GTS12,d3,IGNORE: không có box trên bảng trắng ≈ (685;440)-(710;470),minor,mục 5: bảng thông báo không phải biển luật
+GTS21,d1,sign_family=mandatory; sign_class=keep_left; relevant_to_ego=yes (tròn xanh trên đảo),critical,nhầm keep_right = đi sai phía đảo
+GTS21,d2,informative/pedestrian_crossing; relevant_to_ego=yes,major,lề phải quay về camera
+GTS21,d3,IGNORE: không có box trên cụm 3 biển chỉ đường bên trái (43 / Hagen Wetter / Herbede),major,mục 5
+GTS21,d4,IGNORE: không có box trên cột sọc xanh-trắng ≈ (773;500)-(800;578) và mặt sau biển tròn ≈ (350;520)-(385;560),minor,mục 5: thiết bị dẫn hướng + mặt sau
+GTS21,d5,geometry: box keep_left ≈ (893;478)-(1005;592) không gồm cột,minor,mục 3
+GTS22,d1,label=traffic_sign: tam giác ngược priority/give_way,critical,bỏ sót nhường đường là lỗi critical
+GTS22,d2,give_way: relevant_to_ego=unknown và needs_review=true,major,mục 7: lề trái không có bản lặp bên phải
+GTS22,d3,IGNORE: không có box trên bảng mũi tên đỏ-trắng ≈ (133;500)-(160;540),major,mục 5: tiêu hướng dẫn khúc cua
+GTS22,d4,IGNORE: không có box trên biển chỉ dẫn i hình mũi tên ≈ (95;435)-(158;462),minor,mục 5: biển chỉ đường
+GTS23,d1,label=traffic_sign STOP x2: trái ≈ (440;403)-(488;453) và phải ≈ (930;380)-(982;431); priority/stop,critical,bỏ sót STOP bên trái
+GTS23,d2,cả 2 STOP relevant_to_ego=yes,critical,mục 7: bản lặp bên trái của cùng biển = yes
+GTS23,d3,mandatory/keep_right; relevant_to_ego=yes (tròn xanh trên đảo trái),major,mục 7: đảo giữa chiều ego
+GTS23,d4,IGNORE: không có box trên 2 biển chỉ đường (giữa ảnh + sau STOP phải) và mặt sau biển tròn ≈ (589;514)-(608;537),major,mục 5
+GTS23,d5,geometry: box STOP ôm bát giác không gồm cột,minor,mục 3

@@ -1,1 +1,17 @@
 sample_id,split,tags,reason
+GTS18,example,normal,Hai biển chồng một cột (tam giác cua + tròn 30): minh hoạ mỗi mặt biển một box và box không gồm cột
+GTS20,example,edge;small_far;conflict,Giao lộ nhiều biển + biển chỉ đường + mặt sau biển + biển xa ~20 px: minh hoạ LABEL/IGNORE và relevance đảo giữa
+GTS05,example,edge;ambiguity,Biển ở góc đường ngang + mặt sau hai biển: minh hoạ IGNORE mặt sau và relevance unknown
+GTS28,example,negative,Chỉ có biển quán ăn/quảng cáo: minh hoạ tag no_target_sign
+GTS02,calibration,conflict;edge;occlusion,Giao lộ: tam giác ngược + rẽ trái bên trái và tam giác ngược + rẽ phải bên phải (tam giác trái bị cắt mép trên): thử relevance hai biển mandatory khác hướng và box biển cắt mép
+GTS09,calibration,edge,Cột nhiều biển chỉ đường (IGNORE) cạnh biển qua đường: thử ranh giới biển chỉ đường vs informative
+GTS11,calibration,normal;small_far,Biển xanh mũi tên trên đảo giữa + biển nhỏ xa: thử relevance đảo giữa và ngưỡng 12 px
+GTS13,calibration,small_far;ambiguity,Tam giác có mũi tên đen dày dọc (ưu tiên ở giao lộ tới) + biển tròn nhỏ xa: thử priority_next_intersection vs danger và class unknown ở biển xa
+GTS17,calibration,conflict;ambiguity,Hai cặp tam giác ngược + cấm vào ở lối ra khu thương mại (giữa ảnh và bên phải): thử relevance biển quay về lối đi mà ego có thể không đi vào
+GTS26,calibration,small_far;occlusion,Tam giác rất nhỏ dưới tán cây: thử ngưỡng 12 px và family khi class không đọc được
+GTS27,calibration,low_visibility;edge,Tam giác băng tuyết ngược sáng: thử danger_other vs unknown khi ký hiệu không có trong danh sách
+GTS06,blind,normal;edge,Tròn 30 với hai biển phụ (khoảng cách + giờ): thử box không gồm biển phụ và biển phụ là box riêng
+GTS12,blind,edge;small_far,Tam giác công trường nhỏ xa + mũi tên vàng Umleitung + bảng trắng: thử class ở biển nhỏ và IGNORE biển chỉ đường
+GTS21,blind,edge;conflict,Tròn xanh mũi tên chéo trái + vuông qua đường + cụm biển chỉ đường + cột sọc: thử keep_left vs keep_right và IGNORE thiết bị dẫn hướng
+GTS22,blind,ambiguity;low_visibility,Dưới gầm cầu ngược sáng: tam giác ngược ở lề trái + bảng mũi tên đỏ-trắng + biển chỉ dẫn i: thử relevance unknown/escalate và IGNORE bảng mũi tên
+GTS23,blind,critical;conflict,Hai biển STOP hai bên + tròn xanh trên đảo + biển chỉ đường + mặt sau biển: thử không bỏ sót STOP bên trái và relevance yes cho cả hai
