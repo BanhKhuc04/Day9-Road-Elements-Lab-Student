@@ -1,6 +1,6 @@
 # Annotation guideline — Phân loại biển báo giao thông Việt Nam theo tầng và xác định biển áp dụng cho xe ego — tập trung biển nhỏ/xa, biển tạm công trường và giao lộ nhiều biển
 
-**Version:** v2.0
+**Version:** v3.0
 
 <!--
 v1 = bản nháp đầu; v2 sau calibration; v3 sau blind handoff. Mỗi lần tăng version ghi một dòng vào 08_revision_log.md.
@@ -62,7 +62,7 @@ biển chính — **kể cả biển tạm** gắn trên rào/giá chắn công 
 - Biển làn (tấm chữ nhật xanh chia nhiều cột làn, có hình xe và/hoặc số tốc độ): **1 box cho cả tấm**, không vẽ từng
   cột.
 - Biển khu vực (tấm chữ nhật trắng có chữ **ZONE** bao quanh một biển tròn): **1 box cho cả tấm**, class theo biển
-  tròn bên trong (mục 4).
+  tròn bên trong (mục 4). **TUYỆT ĐỐI KHÔNG vẽ thêm box phụ cho biển tròn hoặc biểu tượng bên trong tấm ZONE**; 1 tấm ZONE = ĐÚNG 1 BOX DUY NHẤT bao toàn bộ viền ngoài tấm chữ nhật.
 - Hai biển giống nhau hai bên đường: 2 box.
 - Nhiều biển chồng lên nhau trên cùng cột (biển sau bị biển trước che một phần): vẫn vẽ biển phía sau nếu phần
   thấy cao ≥ 12 px; box ôm phần thấy; class theo mục 6 (bị che > 50 % → `unknown`).
@@ -159,8 +159,7 @@ Quy tắc đi kèm:
   biển. Chỉ dùng `unknown` khi vị trí thật sự không cho biết (mục 7).
 - Chỉ dùng `sign_family=unknown` ở mức C/D. Đã thấy tròn viền đỏ thì phải là `prohibitory`, không được để `unknown`.
 - **Xác định màu khi biển nhỏ:** zoom 400 %, nhìn **viền ngoài cùng** — viền đỏ (biển cấm/nguy hiểm) hay cả mặt xanh
-  (hiệu lệnh/chỉ dẫn). Không suy family từ vị trí hay biển bên cạnh (ví dụ "đứng cạnh đèn nên chắc là biển chỉ dẫn").
-  Vẫn không chắc đỏ hay xanh → mức C.
+  (hiệu lệnh/chỉ dẫn). **Cấm suy đoán family từ vị trí bên cạnh đèn tín hiệu hay ngã tư** (ví dụ "đứng cạnh đèn tín hiệu thì chắc là biển chỉ dẫn informative"). Bắt buộc zoom 400%, soi pixel viền ngoài cùng: nếu có pixel màu đỏ/sẫm thì bắt buộc gán `prohibitory` (hoặc `danger`), không gán `informative`. Vẫn không chắc đỏ hay xanh → mức C.
 - Mức D: vẽ box + tick `needs_review`. Vật mức D cao < 16 px (tấm tối nhỏ có thể là mặt sau biển, bảng màu nhỏ ở xa)
   không vẽ cũng chấp nhận; **đã vẽ thì bắt buộc tick** `needs_review`.
 - Nhiều biển xa dính nhau trên cùng một cột mà không tách được từng mặt: vẽ **1 box cho cả cụm**, mức C, tick
@@ -175,16 +174,17 @@ Kiểm **theo thứ tự**, dừng ở dòng đầu tiên đúng:
 
 | # | Biển ở đâu (biển quay mặt về camera) | `relevant_to_ego` |
 |---|---|---|
-| 1 | Quay lệch hẳn sang đường ngang, hoặc ở phía chiều ngược lại bên kia dải phân cách | `no` |
+| 1 | Quay lệch hẳn sang đường ngang, hoặc ở phía chiều ngược lại bên kia dải phân cách cứng rõ rệt | `no` |
 | 2 | (d) Trên rào chắn / giá tạm đặt trên chính phần đường ego | `yes` |
 | 3 | (c) Treo trên làn ego (giá long môn) hoặc gắn trên dầm cầu vượt mà ego sắp chui qua | `yes` |
 | 4 | (a) Lề **phải** đường ego | `yes` |
 | 5 | (b) **Đầu** dải phân cách ngăn ego với chiều ngược lại, đứng chắn ngay trước hướng đi của ego, **không có nhánh đường nào** giữa ego và biển (ví dụ cấm đi ngược chiều + đi vòng bên phải) | `yes` |
-| 6 | Còn lại: lề trái, đảo giữa một **nhánh rẽ / đường gom / đường dưới gầm cầu** và đường ego, góc giao lộ — không suy ra được biển phục vụ ego hay nhánh kia | `unknown` + **bắt buộc** `needs_review` |
+| 6 | Còn lại: lề trái, cột/đảo dưới gầm cầu vượt mà ego sắp chui qua, đảo giữa một **nhánh rẽ / đường gom / đường dưới gầm cầu** và đường ego, góc giao lộ — không thể xác định biển phục vụ ego hay nhánh rẽ/chiều khác | `unknown` + **bắt buộc** `needs_review` |
 
 - Biển phụ: relevance **giống biển chính** nó gắn dưới.
 - Relevance gán theo vị trí nên vẫn gán được khi không đọc được biển (mức B/C).
 - Biển ở dòng 6 mà có **bản lặp** ở lề phải (cùng loại biển, cùng khoảng cách): cả hai `yes`.
+- **Cột lề trái dưới gầm cầu vượt:** Tuyệt đối không tự ý gán `no` trừ khi có dải phân cách ngăn cứng và biển chỉ mặt cho chiều ngược lại. Nếu biển nhìn về phía camera ego ở khu vực dưới gầm cầu, bắt buộc gán `unknown` và tick `needs_review` (dòng 6).
 
 **Biển tạm mâu thuẫn biển cố định** (ví dụ mũi tên đi vòng trái trên rào công trường và mũi tên đi vòng phải cố định ở
 dải phân cách): label **cả hai** với relevance theo vị trí như bình thường. Theo QCVN, người đi đường chấp hành **biển
@@ -235,7 +235,7 @@ Ví dụ từ ảnh calibration (lấy từ edge-case card của nhóm, không p
 5. Nhầm `keep_left` / `keep_right`: nhìn **đầu mũi tên chỉ về phía nào** thì đi vòng phía đó.
 6. Nhầm `road_closed` (tròn trắng trống) với `no_entry` (tròn đỏ vạch trắng).
 7. Vẽ từng cột của biển làn → 1 box cả tấm.
-8. Tấm ZONE có vạch chéo đen → `end_of_prohibition`, không phải biển cấm bên trong.
+8. Vẽ lồng 2 box trên tấm ZONE (vừa vẽ cả tấm vừa vẽ thêm biển tròn bên trong) → chỉ 1 box duy nhất cho cả tấm; TUYỆT ĐỐI không vẽ box lồng. Nhầm vạch chéo đen thành cấm thay vì `end_of_prohibition`.
 9. Để `__undefined__` ở `relevant_to_ego`; hoặc relevance `unknown` mà quên tick `needs_review`.
 10. Không vẽ biển xa vì "không biết biển gì" → vẫn vẽ nếu ≥ 12 px, gán theo mức B/C mục 6.1.
 11. Chọn `keep_left`/`keep_right` theo vị trí biển trên đường thay vì theo đầu mũi tên (mục 0).
@@ -250,6 +250,8 @@ Ví dụ từ ảnh calibration (lấy từ edge-case card của nhóm, không p
 19. Gán biển hai xe + số mét thành `no_overtaking` → `min_distance`.
 20. Đọc số trên biển tốc độ nhỏ < 20 px khi chữ số chưa rõ → `unknown` (mục 4, phép thử đọc được).
 21. Box biển nhỏ rộng hơn mặt biển vài px → zoom ≥ 200 % khi vẽ; biển < 30 px chỉ được lệch ≤ 2 px mỗi cạnh.
+22. Gán `relevant_to_ego=no` cho biển ở cột lề trái dưới gầm cầu vượt → phải gán `unknown` + `needs_review` (mục 7 dòng 6) vì không loại trừ được luồng giao thông áp dụng cho ego khi chui qua gầm cầu.
+23. Gán `informative` cho biển mờ gần cột đèn tín hiệu vì nghĩ gần đèn là biển chỉ dẫn → zoom 400% kiểm tra viền pixel; viền đỏ/sẫm là `prohibitory`.
 
 Chưa có ảnh ví dụ trong bộ example/calibration cho STOP, nhường đường, đường ưu tiên, tốc độ tối thiểu — nhận biết theo
 mô tả hình ở bảng mục 4.

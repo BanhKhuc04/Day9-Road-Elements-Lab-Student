@@ -109,3 +109,27 @@ Common mistake: Gán biển hai ô tô + "30 m" thành `no_overtaking` (biển c
 Diversity: conflict / ambiguity (biển có số mét: cự ly tối thiểu vs cấm vượt vs tên cầu)
 
 ---
+
+CASE ID: TV3-3
+Sample: VN16
+Scene: Giao lộ dưới gầm cầu vượt bắc ngang đường, ban ngày; ego đang đi thẳng tiếp cận gầm cầu; lề trái có cột biển dưới gầm cầu và góc ngã tư có đèn tín hiệu
+Observation: Cột lề trái dưới gầm cầu (≈ 335–357, 465–482) có biển tròn viền đỏ (kèm biển phụ rất nhỏ < 12 px không vẽ). Biển quay mặt về phía camera ego, nhưng vị trí nằm lệch hẳn về phía làn đường dưới gầm cầu. Không có dải phân cách cứng phân định chiều ngược lại với làn rẽ dưới gầm cầu. Người gán nhãn phân vân không biết biển có áp dụng cho xe ego hay chỉ áp dụng cho nhánh đường chui gầm cầu
+Decision: LABEL kèm ESCALATE (object); IGNORE biển phụ < 12 px
+Expected: `sign_family=prohibitory; sign_class=no_car hoặc prohibitory_other hoặc unknown; relevant_to_ego=unknown` và **bắt buộc tick `needs_review=true`**
+Rationale: Đây là trường hợp escalation điển hình theo mục 7 dòng 6. Do đặc thù kết cấu hạ tầng giao thông đô thị Việt Nam dưới gầm cầu vượt (luồng rẽ nhánh hỗn hợp), hệ thống downstream không thể tự suy đoán an toàn nếu gán cứng `yes` hoặc `no`. Gán `no` có thể làm xe ego vi phạm nếu biển cấm áp dụng cho cả gầm cầu; gán `yes` có thể làm xe dừng không cần thiết. Vì vậy annotator bắt buộc gán `unknown` + tick `needs_review` để chuyển cho QA Lead/Spec owner phân giải theo sơ đồ tổ chức giao thông thực tế
+Common mistake: 1) Tự ý gán `relevant_to_ego=no` vì thấy biển nằm bên trái; 2) Gán `unknown` nhưng quên tick `needs_review`; 3) Đoán class thành xe tải hay cấm đi thẳng thay vì để `unknown` khi ký hiệu mờ
+Diversity: escalation / ambiguity / underpass
+
+---
+
+CASE ID: TV1-3
+Sample: VN15
+Scene: Đoạn đường quốc lộ ngoại ô, mật độ biển hiệu kinh doanh và bảng quảng cáo dày đặc ở lề phải
+Observation: Lề phải có tấm bảng chữ nhật màu trắng in chữ "ZONE" bao quanh một biển tròn cấm dừng đỗ có vạch chéo đen (≈ 931–1020, 97–247). Xung quanh có nhiều bảng quán ăn, bảng rao bán đất và tờ rơi dán cột
+Decision: LABEL 1 box duy nhất cho cả tấm ZONE; tuyệt đối không vẽ box lồng; IGNORE mọi bảng quán và quảng cáo xung quanh
+Expected: 1 box duy nhất ôm trọn viền ngoài tấm chữ nhật ZONE, `sign_family=prohibitory; sign_class=end_of_prohibition; relevant_to_ego=yes; needs_review=false`. Không vẽ thêm bất kỳ box nào lồng vào biển tròn bên trong
+Rationale: Vi phạm quy tắc annotation unit (mục 2) khi vẽ 2 box lồng nhau (vừa vẽ cả tấm vừa vẽ biển tròn con) sẽ tạo ra duplicate prediction cho downstream detector, làm tăng false positive và gây nhiễu cho bộ lọc cảnh báo của xe (vi phạm hợp đồng downstream 01_problem_statement.md). Quy tắc v3 đã chốt: 1 tấm ZONE = 1 box duy nhất
+Common mistake: Vẽ 2 box lồng nhau (1 box bao cả tấm và 1 box bao biển tròn bên trong); nhầm vạch chéo đen là cấm dừng đỗ thay vì hết khu vực cấm (end_of_prohibition)
+Diversity: critical / unit / geometry / ambiguity
+
+---

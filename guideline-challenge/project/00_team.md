@@ -1,8 +1,8 @@
 # Team
 
 - **Team:** Nhóm 2
-- **Nhóm peer test bài của mình:** chưa công bố — Lab Coach ghép cặp trong buổi
-- **Nhóm mình test bài của:** chưa công bố — Lab Coach ghép cặp trong buổi
+- **Nhóm peer test bài của mình:** Nhóm 5 (người label blind: Nguyễn Hoàng Nam)
+- **Nhóm mình test bài của:** Nhóm 5
 - **Problem family:** Traffic sign taxonomy
 - **Tên đề tài:** Phân loại biển báo giao thông Việt Nam theo tầng và xác định biển áp dụng cho xe ego — tập trung biển nhỏ/xa, biển tạm công trường và giao lộ nhiều biển (*Hierarchical Vietnamese Traffic Sign Taxonomy & Ego Relevance for Small/Far and Temporary Signs*)
 - **Nguồn ảnh:** dataset Kaggle *Vietnamese traffic signs detection and recognition* (được Lab Coach cho phép dùng ngoài `data/`), 16 ảnh ở `data/vtsd/`: 4 example · 7 calibration · 5 blind
