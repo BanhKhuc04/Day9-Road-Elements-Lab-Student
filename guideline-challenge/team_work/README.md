@@ -19,6 +19,125 @@ thư mục này cho nhóm peer.
 - **Gold set**: mỗi người viết expected decision cho ảnh blind của mình trong `gold_part.csv` và 2 card trong
   `cards_part.md`, theo README trong thư mục của mình. Tổng 5 ảnh blind, 8 card.
 
+## Raw label cho CVAT
+
+Khi tạo task (calibration, peer, review): **Labels → tab Raw** → xoá nội dung có sẵn → dán **toàn bộ** khối JSON
+dưới đây → **Save** → sang tab **Constructor** kiểm có đủ `traffic_sign` (4 attribute: `sign_family`, `sign_class`,
+`relevant_to_ego`, `needs_review`), `no_target_sign`, `image_escalate`.
+
+Bản gốc là `project/03_cvat_labels.json` (khớp với bảng ontology trong `project/03_ontology_and_cvat_setup.md`).
+Nếu file gốc đổi, khối dưới đây được cập nhật theo; thấy khác nhau thì dùng file gốc.
+
+```json
+[
+  {
+    "name": "traffic_sign",
+    "color": "#E53935",
+    "type": "rectangle",
+    "attributes": [
+      {
+        "name": "sign_family",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "danger",
+          "prohibitory",
+          "mandatory",
+          "priority",
+          "informative",
+          "supplementary",
+          "unknown"
+        ]
+      },
+      {
+        "name": "sign_class",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "danger_general",
+          "danger_curve",
+          "danger_crossroads",
+          "danger_road_works",
+          "danger_pedestrians",
+          "danger_children",
+          "danger_other",
+          "speed_limit_20",
+          "speed_limit_30",
+          "speed_limit_50",
+          "speed_limit_60",
+          "speed_limit_70",
+          "speed_limit_80",
+          "speed_limit_100",
+          "speed_limit_120",
+          "end_of_restriction",
+          "no_overtaking",
+          "no_entry",
+          "no_vehicles",
+          "no_heavy_vehicles",
+          "no_parking_stopping",
+          "prohibitory_other",
+          "keep_right",
+          "keep_left",
+          "ahead_only",
+          "turn_right",
+          "turn_left",
+          "ahead_or_turn",
+          "roundabout",
+          "mandatory_other",
+          "stop",
+          "give_way",
+          "priority_road",
+          "priority_next_intersection",
+          "pedestrian_crossing",
+          "one_way",
+          "dead_end",
+          "informative_other",
+          "supplementary_plate",
+          "unknown"
+        ]
+      },
+      {
+        "name": "relevant_to_ego",
+        "mutable": false,
+        "input_type": "select",
+        "default_value": "__undefined__",
+        "values": [
+          "__undefined__",
+          "yes",
+          "no",
+          "unknown"
+        ]
+      },
+      {
+        "name": "needs_review",
+        "mutable": false,
+        "input_type": "checkbox",
+        "default_value": "false",
+        "values": [
+          "false"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "no_target_sign",
+    "color": "#43A047",
+    "type": "tag",
+    "attributes": []
+  },
+  {
+    "name": "image_escalate",
+    "color": "#8E24AA",
+    "type": "tag",
+    "attributes": []
+  }
+]
+```
+
 ## Mốc thời gian
 
 | Phút | Việc | Ai |
