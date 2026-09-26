@@ -11,10 +11,10 @@ from pathlib import Path
 BASE = Path(__file__).resolve().parent.parent
 TEAM = BASE / "team_work"
 PARTS = {
-    "tv1_Chien27803": {"GTS06", "GTS12"},
-    "tv2_BanhKhuc04": {"GTS21"},
-    "tv3_congmanhbui0804": {"GTS22"},
-    "tv4_Yuh5124": {"GTS23"},
+    "tv1_Chien27803": {"VN12", "VN15"},
+    "tv2_BanhKhuc04": {"VN13"},
+    "tv3_congmanhbui0804": {"VN16"},
+    "tv4_Yuh5124": {"VN14"},
 }
 FIELDS = ["sample_id", "decision_id", "expected", "severity", "rationale"]
 SEVERITY = {"critical", "major", "minor"}

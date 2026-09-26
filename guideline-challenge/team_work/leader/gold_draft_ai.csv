@@ -1,22 +1,22 @@
 sample_id,decision_id,expected,severity,rationale
-GTS06,d1,label=traffic_sign x3 (tròn 30 + 2 biển phụ ↑300m↑ và 7-18 h),major,mục 2 + mục 5: biển phụ là box riêng
-GTS06,d2,sign_family=prohibitory; sign_class=speed_limit_30; relevant_to_ego=yes,critical,lề phải quay về camera; sai số tốc độ làm ISA nhắc sai
-GTS06,d3,2 biển phụ: sign_family=supplementary; sign_class=supplementary_plate; relevant_to_ego=yes,major,mục 5: relevance biển phụ = biển chính
-GTS06,d4,geometry: box tròn 30 ≈ (818;336)-(857;374) không gồm biển phụ (cạnh dưới ≤ y 377),minor,mục 3
-GTS12,d1,label=traffic_sign x1: tam giác công trường danger/danger_road_works; relevant_to_ego=yes,major,lề phải phía trước; đọc được người xúc đất khi zoom
-GTS12,d2,IGNORE: không có box trên mũi tên vàng Umleitung ≈ (598;427)-(662;446),major,mục 5: biển chỉ đường
-GTS12,d3,IGNORE: không có box trên bảng trắng ≈ (685;440)-(710;470),minor,mục 5: bảng thông báo không phải biển luật
-GTS21,d1,sign_family=mandatory; sign_class=keep_left; relevant_to_ego=yes (tròn xanh trên đảo),critical,nhầm keep_right = đi sai phía đảo
-GTS21,d2,informative/pedestrian_crossing; relevant_to_ego=yes,major,lề phải quay về camera
-GTS21,d3,IGNORE: không có box trên cụm 3 biển chỉ đường bên trái (43 / Hagen Wetter / Herbede),major,mục 5
-GTS21,d4,IGNORE: không có box trên cột sọc xanh-trắng ≈ (773;500)-(800;578) và mặt sau biển tròn ≈ (350;520)-(385;560),minor,mục 5: thiết bị dẫn hướng + mặt sau
-GTS21,d5,geometry: box keep_left ≈ (893;478)-(1005;592) không gồm cột,minor,mục 3
-GTS22,d1,label=traffic_sign: tam giác ngược priority/give_way,critical,bỏ sót nhường đường là lỗi critical
-GTS22,d2,give_way: relevant_to_ego=unknown và needs_review=true,major,mục 7: lề trái không có bản lặp bên phải
-GTS22,d3,IGNORE: không có box trên bảng mũi tên đỏ-trắng ≈ (133;500)-(160;540),major,mục 5: tiêu hướng dẫn khúc cua
-GTS22,d4,IGNORE: không có box trên biển chỉ dẫn i hình mũi tên ≈ (95;435)-(158;462),minor,mục 5: biển chỉ đường
-GTS23,d1,label=traffic_sign STOP x2: trái ≈ (440;403)-(488;453) và phải ≈ (930;380)-(982;431); priority/stop,critical,bỏ sót STOP bên trái
-GTS23,d2,cả 2 STOP relevant_to_ego=yes,critical,mục 7: bản lặp bên trái của cùng biển = yes
-GTS23,d3,mandatory/keep_right; relevant_to_ego=yes (tròn xanh trên đảo trái),major,mục 7: đảo giữa chiều ego
-GTS23,d4,IGNORE: không có box trên 2 biển chỉ đường (giữa ảnh + sau STOP phải) và mặt sau biển tròn ≈ (589;514)-(608;537),major,mục 5
-GTS23,d5,geometry: box STOP ôm bát giác không gồm cột,minor,mục 3
+VN12,d1,sign_family=prohibitory; sign_class=no_u_turn (biển tròn lớn ≈ (1162;62)-(1254;150)),major,một mũi tên chữ U bị gạch; nhãn gốc dataset ghi no u and left turn — nhóm trưởng xem lại
+VN12,d2,biển cấm quay đầu relevant_to_ego=yes,critical,mục 7 (a): lề phải quay về camera
+VN12,d3,geometry: box cấm quay đầu ôm vành đỏ không gồm cột sọc,minor,mục 3
+VN12,d4,label biển tròn đỏ vạch trắng nhỏ ≈ (568;232)-(580;250) dưới gầm cầu: sign_family=prohibitory (class no_entry hoặc unknown đều đúng),major,mục 6: biển 18 px vẫn trong scope
+VN13,d1,label=traffic_sign x4 ở cụm rào công trường bên phải (tròn xanh mũi tên + 3 tam giác),major,mục 1 + mục 5: biển tạm vẫn LABEL
+VN13,d2,tròn xanh mũi tên trái ≈ (1162;368)-(1238;440): mandatory/keep_left; relevant_to_ego=yes,critical,nhầm keep_right = đi vòng sai phía chướng ngại vật
+VN13,d3,3 tam giác: danger_road (đường hẹp) + danger_construction + danger_slow (ĐI CHẬM); relevant_to_ego=yes,major,mục 4
+VN13,d4,IGNORE: không có box trên bảng CÔNG TRƯỜNG ĐANG THI CÔNG ≈ (1258;352)-(1390;395) và bảng THÔNG TIN DỰ ÁN,major,mục 5
+VN13,d5,label 2 biển ở cột dải phân cách xa ≈ (518;180)-(540;217): no_entry + keep_right,major,mục 6: biển xa ~19 px
+VN13,d6,geometry: box keep_left ôm mặt tròn không gồm khung rào,minor,mục 3
+VN14,d1,biển tròn trắng viền đỏ trống ≈ (1352;362)-(1452;442): prohibitory/road_closed; relevant_to_ego=yes,critical,nhầm no_entry/bỏ sót = xe đi vào làn bị chặn
+VN14,d2,tròn xanh mũi tên trái giữa đường ≈ (968;318)-(1022;374): mandatory/keep_left; relevant_to_ego=yes,critical,mục 7 (d): rào đặt trên đường ego
+VN14,d3,3 tam giác: danger_road (hẹp) ≈ (927;313)-(974;368) + danger_slow ≈ (1011;326)-(1060;377) + danger_construction ≈ (1461;373)-(1568;462); relevant_to_ego=yes,major,mục 4
+VN14,d4,đầu dải phân cách ≈ (554;156)-(597;228): no_entry + keep_right; relevant_to_ego=yes,major,mục 7 (b)
+VN14,d5,geometry: box road_closed ôm vành tròn không gồm chân rào,minor,mục 3
+VN15,d1,geometry: 1 box ôm cả tấm ZONE ≈ (934;99)-(1018;243) (không phải chỉ biển tròn bên trong),major,mục 2: biển khu vực
+VN15,d2,tấm ZONE: sign_family=prohibitory; sign_class=end_of_prohibition; relevant_to_ego=yes,major,mục 4 + common mistake 8: vạch chéo đen = hết khu vực cấm dừng đỗ
+VN15,d3,IGNORE: không có box trên bảng BÁN ĐẤT / quán ăn / tờ rơi dán cột,minor,mục 5
+VN16,d1,biển trên dầm cầu vượt ≈ (596;382)-(616;404): prohibitory/height_limit (hoặc unknown nếu không đọc số); relevant_to_ego=yes,critical,mục 7 (c): ego chui qua cầu
+VN16,d2,biển cấm ô tô cột trái ≈ (338;463)-(358;481): prohibitory/no_car; relevant_to_ego=unknown và needs_review=true,major,mục 7: lề trái dưới gầm cầu
+VN16,d3,IGNORE: không có box trên billboard AQUA/ANGIA và bảng trên giá ≈ (270;260)-(450;310),minor,mục 5

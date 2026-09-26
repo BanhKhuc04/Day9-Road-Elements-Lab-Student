@@ -5,7 +5,7 @@ Phần việc của bạn trong **gold set** (nhóm 2). Làm **một mình**, kh
 
 ## Ảnh của bạn
 
-`GTS21` — nằm trong `images/` của thư mục này (bản gốc ở `data/gtsdb/`). Đây là ảnh **blind**: không gửi, không
+`VN13` — nằm trong `images/` của thư mục này (bản gốc ở `data/vtsd/`). Đây là ảnh **blind**: không gửi, không
 chụp cho nhóm peer.
 
 ## Việc cần làm
@@ -25,7 +25,7 @@ chụp cho nhóm peer.
    - `rationale`: vì sao — trỏ tới mục guideline.
    - Mỗi ảnh ≥ 2 decision; cả phần của bạn nên có ≥ 1 decision `critical` hoặc ghi rõ vì sao ảnh không có cơ hội
      critical; ≥ 1 decision `geometry:`.
-4. Điền `cards_part.md`: 2 card: một card cho GTS21, một card cho ảnh calibration GTS09 (biển chỉ đường vs biển informative).
+4. Điền `cards_part.md`: 2 card: một card cho VN13, một card cho ảnh calibration VN06 (biển chỉ đường vs biển informative).
 5. Thấy rule trong guideline không đủ để quyết định → **không tự chế rule**, ghi câu hỏi vào cuối `cards_part.md`
    mục "Câu hỏi cho nhóm trưởng".
 6. `git pull`, commit **chỉ thư mục của bạn**, push: `git add team_work/tv2_BanhKhuc04 && git commit -m "gold part tv2_BanhKhuc04" && git push`.
@@ -34,8 +34,8 @@ chụp cho nhóm peer.
 
 ```csv
 sample_id,decision_id,expected,severity,rationale
-GTS18,d1,label=traffic_sign x2 (tam giác cua + tròn 30),major,mục 2: mỗi mặt biển một box
-GTS18,d2,sign_family=prohibitory; sign_class=speed_limit_30; relevant_to_ego=yes,critical,sai số tốc độ làm ISA nhắc sai
-GTS18,d3,IGNORE: không có box trên bảng trắng ở hàng rào,minor,mục 5: bảng thông báo tư nhân
-GTS18,d4,geometry: box tròn 30 không gồm cột; cạnh lệch ≤ 10%,minor,mục 3
+VN01,d1,label=traffic_sign x2 ở cột phải (tròn 50 + cấm rẽ trái),major,mục 2: mỗi mặt biển một box
+VN01,d2,sign_family=prohibitory; sign_class=speed_limit_50; relevant_to_ego=yes,critical,sai số tốc độ làm hệ thống nhắc sai
+VN01,d3,IGNORE: không có box trên bảng quảng cáo,minor,mục 5
+VN01,d4,geometry: box tròn 50 không gồm cột; cạnh lệch ≤ 10%,minor,mục 3
 ```

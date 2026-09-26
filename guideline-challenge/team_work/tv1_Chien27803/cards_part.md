@@ -5,7 +5,7 @@ Copy khối dưới, điền hết chữ TODO. Không đổi dòng `CASE ID:`.
 ---
 
 CASE ID: TV1-1
-Sample: GTS06
+Sample: VN12
 Scene: TODO
 Observation: TODO — thấy gì trong ảnh
 Decision: TODO — LABEL / IGNORE / UNKNOWN / ESCALATE
@@ -16,7 +16,7 @@ Diversity: TODO — occlusion / small_far / ambiguity / conflict / critical / es
 ---
 
 CASE ID: TV1-2
-Sample: GTS12
+Sample: VN15
 Scene: TODO
 Observation: TODO — thấy gì trong ảnh
 Decision: TODO — LABEL / IGNORE / UNKNOWN / ESCALATE

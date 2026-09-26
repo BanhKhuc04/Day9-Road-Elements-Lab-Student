@@ -1,7 +1,7 @@
 # Calibration nội bộ — nhóm 2 (phút 120–140)
 
 Calibration đo **bất đồng giữa các annotator trên cùng ảnh**, nên cả 4 thành viên label **cùng 7 ảnh** trong
-`images/` (GTS02, GTS09, GTS11, GTS13, GTS17, GTS26, GTS27). Không chia ảnh cho từng người — chia ra thì không có gì
+`images/` (VN05–VN11, ảnh camera hành trình Việt Nam 1622×626). Không chia ảnh cho từng người — chia ra thì không có gì
 để so.
 
 Làm **độc lập**: không nhìn màn hình nhau, không chốt chung cách xử lý ca mơ hồ trước khi export. Chỗ nào phân vân,

@@ -1,17 +1,17 @@
 sample_id,split,tags,reason
-GTS18,example,normal,Hai biển chồng một cột (tam giác cua + tròn 30): minh hoạ mỗi mặt biển một box và box không gồm cột
-GTS20,example,edge;small_far;conflict,Giao lộ nhiều biển + biển chỉ đường + mặt sau biển + biển xa ~20 px: minh hoạ LABEL/IGNORE và relevance đảo giữa
-GTS05,example,edge;ambiguity,Biển ở góc đường ngang + mặt sau hai biển: minh hoạ IGNORE mặt sau và relevance unknown
-GTS28,example,negative,Chỉ có biển quán ăn/quảng cáo: minh hoạ tag no_target_sign
-GTS02,calibration,conflict;edge;occlusion,Giao lộ: tam giác ngược + rẽ trái bên trái và tam giác ngược + rẽ phải bên phải (tam giác trái bị cắt mép trên): thử relevance hai biển mandatory khác hướng và box biển cắt mép
-GTS09,calibration,edge,Cột nhiều biển chỉ đường (IGNORE) cạnh biển qua đường: thử ranh giới biển chỉ đường vs informative
-GTS11,calibration,normal;small_far,Biển xanh mũi tên trên đảo giữa + biển nhỏ xa: thử relevance đảo giữa và ngưỡng 12 px
-GTS13,calibration,small_far;ambiguity,Tam giác có mũi tên đen dày dọc (ưu tiên ở giao lộ tới) + biển tròn nhỏ xa: thử priority_next_intersection vs danger và class unknown ở biển xa
-GTS17,calibration,conflict;ambiguity,Hai cặp tam giác ngược + cấm vào ở lối ra khu thương mại (giữa ảnh và bên phải): thử relevance biển quay về lối đi mà ego có thể không đi vào
-GTS26,calibration,small_far;occlusion,Tam giác rất nhỏ dưới tán cây: thử ngưỡng 12 px và family khi class không đọc được
-GTS27,calibration,low_visibility;edge,Tam giác băng tuyết ngược sáng: thử danger_other vs unknown khi ký hiệu không có trong danh sách
-GTS06,blind,normal;edge,Tròn 30 với hai biển phụ (khoảng cách + giờ): thử box không gồm biển phụ và biển phụ là box riêng
-GTS12,blind,edge;small_far,Tam giác công trường nhỏ xa + mũi tên vàng Umleitung + bảng trắng: thử class ở biển nhỏ và IGNORE biển chỉ đường
-GTS21,blind,edge;conflict,Tròn xanh mũi tên chéo trái + vuông qua đường + cụm biển chỉ đường + cột sọc: thử keep_left vs keep_right và IGNORE thiết bị dẫn hướng
-GTS22,blind,ambiguity;low_visibility,Dưới gầm cầu ngược sáng: tam giác ngược ở lề trái + bảng mũi tên đỏ-trắng + biển chỉ dẫn i: thử relevance unknown/escalate và IGNORE bảng mũi tên
-GTS23,blind,critical;conflict,Hai biển STOP hai bên + tròn xanh trên đảo + biển chỉ đường + mặt sau biển: thử không bỏ sót STOP bên trái và relevance yes cho cả hai
+VN01,example,normal;ambiguity,Cột phải có tốc độ 50 + cấm rẽ trái; lề trái có cấm rẽ phải + biển phụ: minh hoạ mỗi mặt biển một box và relevance unknown ở lề trái
+VN02,example,edge;conflict,Biển làn hai bên + cấm dừng đỗ + vuông xanh mũi tên: minh hoạ 1 box cho cả tấm biển làn
+VN03,example,edge;small_far,Biển chỉ dẫn chợ + tam giác xa + biển < 12 px + quảng cáo: minh hoạ ngưỡng 12 px và IGNORE quảng cáo
+VN04,example,negative,Chỉ có bảng quán và bảng địa danh: minh hoạ tag no_target_sign
+VN05,calibration,conflict;small_far,Giao lộ nhiều biển nhỏ ở đảo giữa và lề phải (cấm ngược chiều + đi vòng; cột nhiều biển cấm): thử relevance đảo giữa và class biển nhỏ
+VN06,calibration,small_far;edge,Ngã tư trạm xăng: biển cấm xe tải lớn bên phải + nhiều biển xa 10–20 px + biển làn xa: thử ngưỡng 12 px
+VN07,calibration,small_far;conflict,Giao lộ có đèn: biển nhỏ xa trên đảo và lề (tốc độ; cấm dừng đỗ; người đi bộ): thử class unknown vs đọc số ở biển xa
+VN08,calibration,ambiguity;negative,Biển bến xe buýt xanh bên trái cạnh vạch qua đường; dataset gốc không gán biển nào: thử scope biển chỉ dẫn informative_other
+VN09,calibration,edge;occlusion,Biển gắn trên cầu vượt bộ hành + biển làn xa: thử relevance biển trên cầu và ngưỡng 12 px
+VN10,calibration,normal,Tam giác người đi bộ + cấm ô tô + tam giác giao nhau nhỏ: thử danger_pedestrian vs danger_other và biển phụ
+VN11,calibration,edge,Cột có biển tải trọng 13t + biển cấm khác + tấm tên cầu: thử weight_limit và IGNORE tấm tên cầu
+VN12,blind,normal,Biển cấm quay đầu lớn bên phải + biển cấm ngược chiều nhỏ xa dưới gầm cầu: thử class + relevance cơ bản và biển xa
+VN13,blind,edge;critical,Cụm biển tạm trên rào công trường (đi vòng trái + hẹp + công trường + đi chậm) cạnh bảng thông tin dự án: thử LABEL biển tạm; IGNORE bảng; keep_left
+VN14,blind,critical;edge,Đường bị chặn: đường cấm + công trường ở làn phải; đi vòng trái + hẹp + đi chậm giữa đường; cấm ngược chiều + đi vòng phải ở đầu dải phân cách: thử road_closed vs no_entry và relevance
+VN15,blind,edge,Tấm ZONE hết khu vực cấm dừng đỗ giữa nhiều bảng quảng cáo: thử 1 box cả tấm và end_of_prohibition
+VN16,blind,ambiguity;small_far,Dưới cầu vượt: biển hạn chế chiều cao trên dầm cầu + cấm ô tô ở cột trái + billboard: thử relevance biển trên dầm và unknown ở lề trái

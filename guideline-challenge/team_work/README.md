@@ -1,4 +1,4 @@
-# Phân việc nhóm 2 — Traffic sign taxonomy
+# Phân việc nhóm 2 — Biển báo giao thông Việt Nam (dataset Kaggle VN)
 
 Nhóm trưởng / điều phối: **Trịnh Quang Trung (toilatrung)** — người duy nhất chạy `make freeze` và `make handoff`.
 
@@ -9,10 +9,10 @@ thư mục này cho nhóm peer.
 
 | Thành viên | GitHub | Calibration (cùng 7 ảnh) | Gold set (ảnh blind riêng) | Edge-case card |
 |---|---|---|---|---|
-| Thành viên 1 | Chien27803 | `tv1.zip` | GTS06, GTS12 → [`tv1_Chien27803/`](tv1_Chien27803/) | TV1-1 (GTS06), TV1-2 (GTS12) |
-| Thành viên 2 | BanhKhuc04 | `tv2.zip` | GTS21 → [`tv2_BanhKhuc04/`](tv2_BanhKhuc04/) | TV2-1 (GTS21), TV2-2 (GTS09) |
-| Thành viên 3 | congmanhbui0804 | `tv3.zip` | GTS22 → [`tv3_congmanhbui0804/`](tv3_congmanhbui0804/) | TV3-1 (GTS22), TV3-2 (GTS27) |
-| Thành viên 4 | Yuh5124 | `tv4.zip` | GTS23 → [`tv4_Yuh5124/`](tv4_Yuh5124/) | TV4-1 (GTS23), TV4-2 (GTS17) |
+| Thành viên 1 | Chien27803 | `tv1.zip` | VN12, VN15 → [`tv1_Chien27803/`](tv1_Chien27803/) | TV1-1 (VN12), TV1-2 (VN15) |
+| Thành viên 2 | BanhKhuc04 | `tv2.zip` | VN13 → [`tv2_BanhKhuc04/`](tv2_BanhKhuc04/) | TV2-1 (VN13), TV2-2 (VN06) |
+| Thành viên 3 | congmanhbui0804 | `tv3.zip` | VN16 → [`tv3_congmanhbui0804/`](tv3_congmanhbui0804/) | TV3-1 (VN16), TV3-2 (VN08) |
+| Thành viên 4 | Yuh5124 | `tv4.zip` | VN14 → [`tv4_Yuh5124/`](tv4_Yuh5124/) | TV4-1 (VN14), TV4-2 (VN11) |
 
 - **Calibration** ([`calibration/README.md`](calibration/README.md)): cả 4 người label **cùng** 7 ảnh, độc lập, để đo
   bất đồng.
@@ -42,10 +42,9 @@ Nếu file gốc đổi, khối dưới đây được cập nhật theo; thấy
         "default_value": "__undefined__",
         "values": [
           "__undefined__",
-          "danger",
           "prohibitory",
+          "danger",
           "mandatory",
-          "priority",
           "informative",
           "supplementary",
           "unknown"
@@ -58,43 +57,48 @@ Nếu file gốc đổi, khối dưới đây được cập nhật theo; thấy
         "default_value": "__undefined__",
         "values": [
           "__undefined__",
-          "danger_general",
-          "danger_curve",
-          "danger_crossroads",
-          "danger_road_works",
-          "danger_pedestrians",
-          "danger_children",
-          "danger_other",
-          "speed_limit_20",
+          "no_entry",
+          "road_closed",
+          "no_stopping_parking",
+          "no_parking",
+          "no_turn_left",
+          "no_turn_right",
+          "no_u_turn",
+          "no_u_and_left_turn",
+          "no_u_and_right_turn",
+          "no_motorbike",
+          "no_car",
+          "no_truck",
+          "no_overtaking",
           "speed_limit_30",
+          "speed_limit_40",
           "speed_limit_50",
           "speed_limit_60",
           "speed_limit_70",
           "speed_limit_80",
-          "speed_limit_100",
-          "speed_limit_120",
-          "end_of_restriction",
-          "no_overtaking",
-          "no_entry",
-          "no_vehicles",
-          "no_heavy_vehicles",
-          "no_parking_stopping",
+          "speed_limit_other",
+          "weight_limit",
+          "height_limit",
+          "end_of_prohibition",
           "prohibitory_other",
+          "danger_intersection",
+          "danger_road",
+          "danger_pedestrian",
+          "danger_construction",
+          "danger_slow",
+          "danger_other",
           "keep_right",
           "keep_left",
           "ahead_only",
-          "turn_right",
-          "turn_left",
-          "ahead_or_turn",
+          "turn_left_only",
+          "turn_right_only",
           "roundabout",
+          "lane_vehicle_permission",
+          "lane_vehicle_speed",
           "mandatory_other",
-          "stop",
-          "give_way",
-          "priority_road",
-          "priority_next_intersection",
           "pedestrian_crossing",
           "one_way",
-          "dead_end",
+          "overpass_route",
           "informative_other",
           "supplementary_plate",
           "unknown"
